@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ObjectsDialog</class>
+ <widget class="QDialog" name="ObjectsDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>408</width>
+    <height>284</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Objects</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QScrollArea" name="scrollArea">
+     <property name="widgetResizable">
+      <bool>true</bool>
+     </property>
+     <widget class="QWidget" name="scrollAreaWidgetContents">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>406</width>
+        <height>282</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QLabel" name="label">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Primitives</string>
+         </property>
+         <property name="buddy">
+          <cstring>label</cstring>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frame">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+           <horstretch>5</horstretch>
+           <verstretch>5</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>80</height>
+          </size>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QPushButton" name="pointButton">
+            <property name="toolTip">
+             <string>Point</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>:/cameraButton/icons/point.png</normaloff>:/cameraButton/icons/point.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="torusButton">
+            <property name="toolTip">
+             <string>Torus</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>:/cameraButton/icons/torus.png</normaloff>:/cameraButton/icons/torus.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="sphereButton">
+            <property name="text">
+             <string>Sphere</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_3">
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Curves</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frame_3">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>5</horstretch>
+           <verstretch>5</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>80</height>
+          </size>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QPushButton" name="bezierButton">
+            <property name="toolTip">
+             <string>Bezier C0</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>:/objects/icons/bezier_c0.png</normaloff>:/objects/icons/bezier_c0.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="bsplineButton">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>:/objects/icons/bspline.png</normaloff>:/objects/icons/bspline.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="bsplineInterpButton">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>:/objects/icons/bspline_interp_white.png</normaloff>:/objects/icons/bspline_interp_white.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_4">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Surfaces</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frame_2">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>5</horstretch>
+           <verstretch>5</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>80</height>
+          </size>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <widget class="QPushButton" name="surfaceC0RectButton">
+            <property name="text">
+             <string>C0 Rect</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="surfaceC0CylinderButton">
+            <property name="text">
+             <string>C0 Cylind</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="surfaceC2RectButton">
+            <property name="text">
+             <string>C2 Rect</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="surfaceC2CylinderButton">
+            <property name="text">
+             <string>C2 Cylind</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>pointButton</sender>
+   <signal>clicked()</signal>
+   <receiver>ObjectsDialog</receiver>
+   <slot>pointButtonClick()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>52</x>
+     <y>72</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>221</x>
+     <y>175</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>torusButton</sender>
+   <signal>clicked()</signal>
+   <receiver>ObjectsDialog</receiver>
+   <slot>torusButtonClick()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>124</x>
+     <y>72</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>221</x>
+     <y>175</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bezierButton</sender>
+   <signal>clicked()</signal>
+   <receiver>ObjectsDialog</receiver>
+   <slot>bezierC0ButtonClick()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>52</x>
+     <y>181</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>221</x>
+     <y>175</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bsplineButton</sender>
+   <signal>clicked()</signal>
+   <receiver>ObjectsDialog</receiver>
+   <slot>bsplineButtonClick()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>124</x>
+     <y>181</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>221</x>
+     <y>175</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bsplineInterpButton</sender>
+   <signal>clicked()</signal>
+   <receiver>ObjectsDialog</receiver>
+   <slot>bsplineInterpButtonClick()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>196</x>
+     <y>181</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>221</x>
+     <y>175</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>surfaceC0RectButton</sender>
+   <signal>clicked()</signal>
+   <receiver>ObjectsDialog</receiver>
+   <slot>surfaceC0RectButtonClick()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>59</x>
+     <y>189</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>87</x>
+     <y>123</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>surfaceC0CylinderButton</sender>
+   <signal>clicked()</signal>
+   <receiver>ObjectsDialog</receiver>
+   <slot>surfaceC0CylindButtonClick()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>199</x>
+     <y>189</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>126</x>
+     <y>120</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>surfaceC2RectButton</sender>
+   <signal>clicked()</signal>
+   <receiver>ObjectsDialog</receiver>
+   <slot>surfaceC2RectButtonClick()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>322</x>
+     <y>204</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>203</x>
+     <y>141</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>surfaceC2CylinderButton</sender>
+   <signal>clicked()</signal>
+   <receiver>ObjectsDialog</receiver>
+   <slot>surfaceC2CylindButtonClick()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>320</x>
+     <y>191</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>203</x>
+     <y>141</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sphereButton</sender>
+   <signal>clicked()</signal>
+   <receiver>ObjectsDialog</receiver>
+   <slot>sphereButtonClick()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>146</x>
+     <y>55</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>203</x>
+     <y>141</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>pointButtonClick()</slot>
+  <slot>torusButtonClick()</slot>
+  <slot>bezierC0ButtonClick()</slot>
+  <slot>bsplineButtonClick()</slot>
+  <slot>bsplineInterpButtonClick()</slot>
+  <slot>surfaceC0RectButtonClick()</slot>
+  <slot>surfaceC0CylindButtonClick()</slot>
+  <slot>surfaceC2RectButtonClick()</slot>
+  <slot>surfaceC2CylindButtonClick()</slot>
+  <slot>sphereButtonClick()</slot>
+ </slots>
+</ui>

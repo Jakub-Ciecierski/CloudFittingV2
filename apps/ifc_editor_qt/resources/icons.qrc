@@ -1,0 +1,26 @@
+<RCC>
+    <qresource prefix="/cameraButton">
+        <file>icons/camera.ico</file>
+        <file>icons/3d.ico</file>
+        <file>icons/nvidia1.ico</file>
+        <file>icons/nvidia2.ico</file>
+        <file>icons/points.png</file>
+        <file>icons/points_white.png</file>
+        <file>icons/torus.png</file>
+        <file>icons/point.png</file>
+        <file>icons/bspline_interp.png</file>
+        <file>icons/bspline.png</file>
+        <file>icons/bezier_c0.png</file>
+        <file>icons/geometry_white.png</file>
+        <file>icons/home.svg</file>
+        <file>icons/magnet.svg</file>
+    </qresource>
+    <qresource prefix="/objects">
+        <file>icons/torus.png</file>
+        <file>icons/point.png</file>
+        <file>icons/bspline_interp.png</file>
+        <file>icons/bspline.png</file>
+        <file>icons/bezier_c0.png</file>
+        <file>icons/bspline_interp_white.png</file>
+    </qresource>
+</RCC>
