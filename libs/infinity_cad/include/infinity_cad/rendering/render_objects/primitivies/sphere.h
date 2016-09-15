@@ -40,6 +40,7 @@ public:
 
     // Overridden from RenderObject
     glm::vec3 getClosestPoint(const glm::vec3& point) override;
+    glm::vec3 computeNormal(const glm::vec3& v) override;
 };
 
 

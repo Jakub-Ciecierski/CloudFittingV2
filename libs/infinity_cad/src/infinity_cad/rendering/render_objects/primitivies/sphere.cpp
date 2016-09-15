@@ -140,3 +140,7 @@ glm::vec3 Sphere::getClosestPoint(const glm::vec3& point) {
 
     return closestPoint;
 }
+
+glm::vec3 Sphere::computeNormal(const glm::vec3& v) {
+    return glm::normalize(getPosition() - v);
+}

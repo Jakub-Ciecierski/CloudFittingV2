@@ -8,6 +8,7 @@
 #include <fitting/pso/transform_vector.h>
 #include <threading/thread_util.h>
 #include <infinity_cad/rendering/render_objects/cloud.h>
+#include "infinity_cad/math/math.h"
 
 using namespace pso;
 using namespace std;
@@ -47,7 +48,17 @@ double CloudFitness::computeGoalFunction(Cloud* cloud, RigidObject* rigidBody){
         sumOfDistances += distance;
     }
 
-    // TODO compute sumOfNormals
+    for(unsigned int i = 0; i < worldVertices.size(); i++){
+        vec4 v4 = worldVertices[i];
+        vec3 v = vec3(v4.x, v4.y, v4.z);
+        vec3 clostestPoint = rigidBody->getClosestPoint(v);
+
+        vec3 cloudNormal = cloud->getNormalAt(i);
+        vec3 sphereNormal = rigidBody->computeNormal(clostestPoint);
+
+        float value = 1 - ifc::dot(cloudNormal, sphereNormal);
+        sumOfNormals += value;
+    }
 
     double goalValue = (distancesWeight * sumOfDistances) +
             (normalAnglesWeight * sumOfNormals);

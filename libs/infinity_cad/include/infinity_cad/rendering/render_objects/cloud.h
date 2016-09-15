@@ -31,6 +31,9 @@ public:
     ~Cloud();
     const std::vector<glm::vec4>& getWorldVertices();
 
+    glm::vec3 getNormalAt(int i);
+    std::vector<glm::vec3> getClosestPoints(const glm::vec3& point, int count, int ignore);
+
 };
 
 

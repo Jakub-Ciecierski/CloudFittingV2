@@ -86,6 +86,7 @@ public:
     const glm::vec3& getPosition() const;
 
     virtual glm::vec3 getClosestPoint(const glm::vec3& point);
+    virtual glm::vec3 computeNormal(const glm::vec3& v);
 
     /*
      * ModelMatrix = Translate * Rotate * Scale

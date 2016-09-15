@@ -187,3 +187,7 @@ void RigidObject::update() {
                         constructRotationMatrix() *
                         constructScaleMatrix();
 }
+
+glm::vec3 RigidObject::computeNormal(const glm::vec3& v){
+    return vec3(0,0,0);
+}
