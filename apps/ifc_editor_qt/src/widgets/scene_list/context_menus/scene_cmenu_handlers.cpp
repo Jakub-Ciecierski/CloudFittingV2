@@ -143,7 +143,7 @@ SceneCMHandler SCM_CLOUD_HANDLER(
 });
 
 SceneCMHandler SCM_CLOUD_FITTING_HANDLER(
-        "Create Cloud",
+        "Fitting",
         [](Item* item){
     ObjectManager& objManager = ObjectManager::getInstance();
     SceneTree* sceneTree = objManager.getSceneTree();
