@@ -111,5 +111,5 @@ void CloudFitness::actOn(Particle& particle){
     TransformVector* tv =
             (TransformVector*)this->particleDecoder->decodeCurrent(particle);
     tv->transform(cloud);
-    threading::threadSleep(1);
+    //threading::threadSleep(1);
 }

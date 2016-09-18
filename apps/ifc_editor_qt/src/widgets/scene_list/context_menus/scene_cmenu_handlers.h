@@ -1,4 +1,4 @@
-#ifndef SCENECMENUHANDLERS_H
+﻿#ifndef SCENECMENUHANDLERS_H
 #define SCENECMENUHANDLERS_H
 
 #include <context_menus/scene_context_menu.h>
@@ -32,6 +32,7 @@ extern SceneCMHandler SCM_GREGORY_RENDER_SECOND_PATCH_HANDLER;
 extern SceneCMHandler SCM_GREGORY_RENDER_THIRD_PATCH_HANDLER;
 
 extern SceneCMHandler SCM_CLOUD_HANDLER;
-extern SceneCMHandler SCM_CLOUD_FITTING_HANDLER;
+extern SceneCMHandler SCM_CLOUD_FITTING_PSO_HANDLER;
+extern SceneCMHandler SCM_CLOUD_FITTING_GRADIENT_HANDLER;
 
 #endif // SCENECMENUHANDLERS_H

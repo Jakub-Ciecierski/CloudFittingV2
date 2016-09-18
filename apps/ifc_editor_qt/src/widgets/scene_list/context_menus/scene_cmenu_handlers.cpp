@@ -142,8 +142,8 @@ SceneCMHandler SCM_CLOUD_HANDLER(
     objManager.addCloud(sphere);
 });
 
-SceneCMHandler SCM_CLOUD_FITTING_HANDLER(
-        "Fitting",
+SceneCMHandler SCM_CLOUD_FITTING_PSO_HANDLER(
+        "Fitting - PSO",
         [](Item* item){
     ObjectManager& objManager = ObjectManager::getInstance();
     SceneTree* sceneTree = objManager.getSceneTree();
@@ -157,5 +157,23 @@ SceneCMHandler SCM_CLOUD_FITTING_HANDLER(
     Sphere* sphere = static_cast<Sphere*>(spheres[0]->object);
     Cloud* cloud = static_cast<Cloud*>(clouds[0]->object);
 
-    objManager.startCloudFitting(cloud, sphere);
+    objManager.startCloudFittingPSO(cloud, sphere);
+});
+
+SceneCMHandler SCM_CLOUD_FITTING_GRADIENT_HANDLER(
+        "Fitting - Gradient Descent",
+        [](Item* item){
+    ObjectManager& objManager = ObjectManager::getInstance();
+    SceneTree* sceneTree = objManager.getSceneTree();
+
+    std::vector<Item*> spheres = sceneTree->getSelectedItems(RB_SPHERE_TYPE);
+    std::vector<Item*> clouds = sceneTree->getSelectedItems(RB_CLOUD_TYPE);
+
+    if(spheres.size() != 1) return;
+    if(clouds.size() != 1) return;
+
+    Sphere* sphere = static_cast<Sphere*>(spheres[0]->object);
+    Cloud* cloud = static_cast<Cloud*>(clouds[0]->object);
+
+    objManager.startCloudFittingGradient(cloud, sphere);
 });

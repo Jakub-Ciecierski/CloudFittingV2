@@ -148,6 +148,10 @@ void RigidObject::rotateTo(float xAngle, float yAngle, float zAngle){
     clampAngles();
 }
 
+void RigidObject::rotateTo(const glm::vec3& rotation){
+    rotateTo(rotation.x, rotation.y, rotation.z);
+}
+
 void RigidObject::rotate(float dxAngle, float dyAngle, float dzAngle) {
     rotationAngles.x += dxAngle;
     rotationAngles.y += dyAngle;

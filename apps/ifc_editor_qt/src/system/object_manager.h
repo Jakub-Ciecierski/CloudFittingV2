@@ -70,7 +70,8 @@ public:
     Item* addSurfaceGregory(std::string name, Surface* surface1,
                             Surface* surface2, Surface* surface3);
 
-    void startCloudFitting(Cloud* cloud, Sphere* sphere);
+    void startCloudFittingPSO(Cloud* cloud, Sphere* sphere);
+    void startCloudFittingGradient(Cloud* cloud, Sphere* sphere);
 
     // TODO split
     void addChildItem(Item* bezier, Item* objectName);
@@ -107,6 +108,7 @@ public:
     void TEST_PERFORMANCE();
     void TEST_BSPLINE_INTERP();
     void TEST_SURFACE();
+    void TEST_SPHERE();
 };
 
 #endif // OBJECTMANAGER_H

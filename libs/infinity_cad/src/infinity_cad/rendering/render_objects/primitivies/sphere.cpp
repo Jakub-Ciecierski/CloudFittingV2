@@ -120,7 +120,13 @@ Cloud* Sphere::extractRandomCloud(int verticesCount,
         float y = getY(s,r);
         float z = getZ(s,r);
 
-        points[i] = vec4(x,y,z,1);
+        float minDistortion = 0.0;
+        float maxDistortion = 0.5;
+        float xDist = rnd::generateRandomNumber(minDistortion, maxDistortion);
+        float yDist = rnd::generateRandomNumber(minDistortion, maxDistortion);
+        float zDist = rnd::generateRandomNumber(minDistortion, maxDistortion);
+
+        points[i] = vec4(x + xDist, y + yDist, z + zDist, 1);
     }
     ObjectFactory& objectFactory = ObjectFactory::getInstance();
     Cloud* cloud = objectFactory.createCloud("Cloud", points);

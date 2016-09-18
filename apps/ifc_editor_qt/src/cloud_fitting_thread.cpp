@@ -1,10 +1,10 @@
 #include "cloud_fitting_thread.h"
 
-#include <fitting/cloud_fitter.h>
-
 CloudFittingThread::CloudFittingThread(){
     this->sphere = nullptr;
     this->cloud = nullptr;
+
+    algorithm_type = CloudFittingAlgorithm::PSO;
 }
 
 void CloudFittingThread::setCloud(Cloud* cloud){
@@ -15,7 +15,11 @@ void CloudFittingThread::setSphere(Sphere* sphere){
     this->sphere = sphere;
 }
 
+void CloudFittingThread::setType(CloudFittingAlgorithm algorithm_type){
+    this->algorithm_type = algorithm_type;
+}
+
 void CloudFittingThread::run(){
     CloudFitter cloudFitter(cloud, sphere);
-    cloudFitter.startFitting();
+    cloudFitter.startFitting(algorithm_type);
 }

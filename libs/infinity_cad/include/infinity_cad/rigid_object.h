@@ -77,6 +77,7 @@ public:
 
     void rotate(float dxAngle, float dyAngle, float dzAngle);
     void rotateTo(float xAngle, float yAngle, float zAngle);
+    void rotateTo(const glm::vec3& rotation);
 
 
     void scale(float scale);

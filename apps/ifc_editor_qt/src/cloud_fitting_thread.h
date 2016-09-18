@@ -6,6 +6,8 @@
 #include <infinity_cad/rendering/render_objects/cloud.h>
 #include <infinity_cad/rendering/render_objects/primitivies/sphere.h>
 
+#include <fitting/cloud_fitter.h>
+
 class CloudFittingThread : public QThread
 {
 public:
@@ -16,9 +18,13 @@ public:
     void setCloud(Cloud* cloud);
     void setSphere(Sphere* sphere);
 
+    void setType(CloudFittingAlgorithm algorithm_type);
+
 private:
     Cloud* cloud;
     Sphere* sphere;
+
+    CloudFittingAlgorithm algorithm_type;
 };
 
 #endif // CLOUDFITTINGTHREAD_H

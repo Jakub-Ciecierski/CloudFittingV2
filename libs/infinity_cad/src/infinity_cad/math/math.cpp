@@ -177,3 +177,7 @@ float ifc::derivative(function<float(float, float, float, float)> f,
     if(isnan(value)) value = 0.0f;
     return value;
 }
+
+glm::vec3 ifc::toVec3(const glm::vec4& v4){
+    return glm::vec3(v4.x, v4.y, v4.z);
+}

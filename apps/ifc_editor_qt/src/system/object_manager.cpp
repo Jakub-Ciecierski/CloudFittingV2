@@ -448,9 +448,19 @@ Item* ObjectManager::addObject(const Type& type, string name){
     return item;
 }
 
-void ObjectManager::startCloudFitting(Cloud* cloud, Sphere* sphere){
+void ObjectManager::startCloudFittingPSO(Cloud* cloud, Sphere* sphere){
     cloudFittingThread.setCloud(cloud);
     cloudFittingThread.setSphere(sphere);
+    cloudFittingThread.setType(CloudFittingAlgorithm::PSO);
+
+    cloudFittingThread.start();
+}
+
+void ObjectManager::startCloudFittingGradient(Cloud* cloud, Sphere* sphere){
+    cloudFittingThread.setCloud(cloud);
+    cloudFittingThread.setSphere(sphere);
+    cloudFittingThread.setType(CloudFittingAlgorithm::GRADIENT_DESCENT);
+
     cloudFittingThread.start();
 }
 
@@ -986,4 +996,9 @@ void ObjectManager::TEST_SURFACE(){
         sceneTree->addChildItem(surfaceItem, pointItem);
     }
 
+}
+
+void ObjectManager::TEST_SPHERE(){
+    Item* item = addObject(RB_SPHERE_TYPE, "sphere");
+    addCloud(static_cast<Sphere*>(item->object));
 }

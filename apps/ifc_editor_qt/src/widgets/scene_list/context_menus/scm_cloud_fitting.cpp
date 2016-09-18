@@ -8,5 +8,6 @@ SCMCloudFitting::SCMCloudFitting() : SceneContextMenu()
 }
 
 void SCMCloudFitting::init(){
-    this->addHandlerAndAction(SCM_CLOUD_FITTING_HANDLER);
+    this->addHandlerAndAction(SCM_CLOUD_FITTING_PSO_HANDLER);
+    this->addHandlerAndAction(SCM_CLOUD_FITTING_GRADIENT_HANDLER);
 }

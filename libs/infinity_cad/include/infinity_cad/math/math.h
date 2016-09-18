@@ -48,6 +48,8 @@ namespace ifc {
     float derivative(std::function<float(float, float, float, float)> f,
                      float x, float y, float z, float w,
                      DerivativeTypes derivativeType);
+
+    glm::vec3 toVec3(const glm::vec4& v4);
 }
 
 #endif //IC_MATH_H

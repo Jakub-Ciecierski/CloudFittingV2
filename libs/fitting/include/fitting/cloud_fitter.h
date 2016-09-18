@@ -7,18 +7,24 @@
 
 #include <infinity_cad/rendering/render_objects/cloud.h>
 
+enum class CloudFittingAlgorithm{
+    PSO, GRADIENT_DESCENT
+};
+
 class CloudFitter {
 private:
     RigidObject* rigidBody;
     Cloud* cloud;
 
+    void startPSO();
+    void startGradientDescent();
 public:
 
     CloudFitter(Cloud* cloud, RigidObject* rigidBody);
 
     ~CloudFitter();
 
-    void startFitting();
+    void startFitting(CloudFittingAlgorithm type = CloudFittingAlgorithm::PSO);
 
 };
 
