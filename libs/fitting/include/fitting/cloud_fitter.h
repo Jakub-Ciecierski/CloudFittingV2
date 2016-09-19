@@ -6,6 +6,7 @@
 #define MG1_CLOUDFITTER_H
 
 #include <infinity_cad/rendering/render_objects/cloud.h>
+#include <fitting/gradient_descent/gradient_descent.h>
 
 enum class CloudFittingAlgorithm{
     PSO, GRADIENT_DESCENT
@@ -18,6 +19,9 @@ private:
 
     void startPSO();
     void startGradientDescent();
+
+    GradientParams gradient_params;
+
 public:
 
     CloudFitter(Cloud* cloud, RigidObject* rigidBody);
@@ -26,6 +30,8 @@ public:
 
     void startFitting(CloudFittingAlgorithm type = CloudFittingAlgorithm::PSO);
 
+    void setGradientParams(GradientParams params){this->gradient_params =
+                                                          params;}
 };
 
 

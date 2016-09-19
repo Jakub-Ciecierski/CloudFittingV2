@@ -31,10 +31,10 @@ void FittingWorkshop::createSphere(){
 
 
 void FittingWorkshop::createClouds(){
-    Cloud* cloud1 = sphere->extractRandomCloud(100, 1, 1);
-    Cloud* cloud2 = sphere->extractRandomCloud(100, 2, 1);
-    Cloud* cloud3 = sphere->extractRandomCloud(100, 1, 2);
-    Cloud* cloud4 = sphere->extractRandomCloud(100, 2, 2);
+    Cloud* cloud1 = sphere->extractRandomCloud(100, 1, 1, 0);
+    Cloud* cloud2 = sphere->extractRandomCloud(100, 2, 1, 0);
+    Cloud* cloud3 = sphere->extractRandomCloud(100, 1, 2, 0);
+    Cloud* cloud4 = sphere->extractRandomCloud(100, 2, 2, 0);
 
     cloud1->move(1.5, 0.0, 1.5);
     cloud2->move(1.5, 0.0, -1.5);

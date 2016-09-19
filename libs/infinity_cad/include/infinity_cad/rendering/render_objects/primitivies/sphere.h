@@ -36,7 +36,8 @@ public:
     ~Sphere();
 
     Cloud* extractRandomCloud(int verticesCount,
-                              float sDivider, float rDivider);
+                              float sDivider, float rDivider,
+                              float distortion);
 
     // Overridden from RenderObject
     glm::vec3 getClosestPoint(const glm::vec3& point) override;

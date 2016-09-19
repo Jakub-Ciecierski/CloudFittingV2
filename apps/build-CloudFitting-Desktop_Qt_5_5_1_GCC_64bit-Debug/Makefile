@@ -89,7 +89,8 @@ SOURCES       = ../ifc_editor_qt/src/glwidget.cpp \
 		../ifc_editor_qt/src/widgets/scene_list/context_menus/scm_sphere.cpp \
 		../ifc_editor_qt/src/dialogs/cloud_dialog.cpp \
 		../ifc_editor_qt/src/widgets/scene_list/context_menus/scm_cloud_fitting.cpp \
-		../ifc_editor_qt/src/cloud_fitting_thread.cpp build/rcc/qrc_icons.cpp \
+		../ifc_editor_qt/src/cloud_fitting_thread.cpp \
+		../ifc_editor_qt/src/dialogs/gradient_descent_dialog.cpp build/rcc/qrc_icons.cpp \
 		build/rcc/qrc_style.cpp \
 		build/moc/moc_scene_tree.cpp \
 		build/moc/moc_editor_window.cpp \
@@ -100,7 +101,8 @@ SOURCES       = ../ifc_editor_qt/src/glwidget.cpp \
 		build/moc/moc_qcustomplot.cpp \
 		build/moc/moc_intersectiondialog.cpp \
 		build/moc/moc_sphere_dialog.cpp \
-		build/moc/moc_cloud_dialog.cpp
+		build/moc/moc_cloud_dialog.cpp \
+		build/moc/moc_gradient_descent_dialog.cpp
 OBJECTS       = build/obj/glwidget.o \
 		build/obj/main.o \
 		build/obj/controls.o \
@@ -143,6 +145,7 @@ OBJECTS       = build/obj/glwidget.o \
 		build/obj/cloud_dialog.o \
 		build/obj/scm_cloud_fitting.o \
 		build/obj/cloud_fitting_thread.o \
+		build/obj/gradient_descent_dialog.o \
 		build/obj/qrc_icons.o \
 		build/obj/qrc_style.o \
 		build/obj/moc_scene_tree.o \
@@ -154,7 +157,8 @@ OBJECTS       = build/obj/glwidget.o \
 		build/obj/moc_qcustomplot.o \
 		build/obj/moc_intersectiondialog.o \
 		build/obj/moc_sphere_dialog.o \
-		build/obj/moc_cloud_dialog.o
+		build/obj/moc_cloud_dialog.o \
+		build/obj/moc_gradient_descent_dialog.o
 DIST          = ../../../../ide/qt/5.5/gcc_64/mkspecs/features/spec_pre.prf \
 		../../../../ide/qt/5.5/gcc_64/mkspecs/common/unix.conf \
 		../../../../ide/qt/5.5/gcc_64/mkspecs/common/linux.conf \
@@ -334,7 +338,8 @@ DIST          = ../../../../ide/qt/5.5/gcc_64/mkspecs/features/spec_pre.prf \
 		../ifc_editor_qt/src/widgets/scene_list/context_menus/scm_sphere.h \
 		../ifc_editor_qt/src/dialogs/cloud_dialog.h \
 		../ifc_editor_qt/src/widgets/scene_list/context_menus/scm_cloud_fitting.h \
-		../ifc_editor_qt/src/cloud_fitting_thread.h ../ifc_editor_qt/src/glwidget.cpp \
+		../ifc_editor_qt/src/cloud_fitting_thread.h \
+		../ifc_editor_qt/src/dialogs/gradient_descent_dialog.h ../ifc_editor_qt/src/glwidget.cpp \
 		../ifc_editor_qt/src/main.cpp \
 		../ifc_editor_qt/src/controls.cpp \
 		../ifc_editor_qt/src/context_menus/context_menu.cpp \
@@ -375,7 +380,8 @@ DIST          = ../../../../ide/qt/5.5/gcc_64/mkspecs/features/spec_pre.prf \
 		../ifc_editor_qt/src/widgets/scene_list/context_menus/scm_sphere.cpp \
 		../ifc_editor_qt/src/dialogs/cloud_dialog.cpp \
 		../ifc_editor_qt/src/widgets/scene_list/context_menus/scm_cloud_fitting.cpp \
-		../ifc_editor_qt/src/cloud_fitting_thread.cpp
+		../ifc_editor_qt/src/cloud_fitting_thread.cpp \
+		../ifc_editor_qt/src/dialogs/gradient_descent_dialog.cpp
 QMAKE_TARGET  = InfinityCAD
 DESTDIR       = build/#avoid trailing-slash linebreak
 TARGET        = build/InfinityCAD
@@ -403,7 +409,7 @@ first: all
 
 ####### Build rules
 
-$(TARGET): .buildfile build/ui/ui_mainwindow.h build/ui/ui_objects_dialog.h build/ui/ui_surface_settings_dialog.h build/ui/ui_surface_c0_dialog.h build/ui/ui_intersectiondialog.h build/ui/ui_sphere_dialog.h build/ui/ui_cloud_dialog.h $(OBJECTS)  
+$(TARGET): .buildfile build/ui/ui_mainwindow.h build/ui/ui_objects_dialog.h build/ui/ui_surface_settings_dialog.h build/ui/ui_surface_c0_dialog.h build/ui/ui_intersectiondialog.h build/ui/ui_sphere_dialog.h build/ui/ui_cloud_dialog.h build/ui/ui_gradient_descent_dialog.h $(OBJECTS)  
 	@test -d build/ || mkdir -p build/
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
@@ -713,9 +719,9 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../ifc_editor_qt/resources/icons.qrc ../ifc_editor_qt/qdarkstyle/style.qrc $(DISTDIR)/
-	$(COPY_FILE) --parents ../ifc_editor_qt/build/ui/ui_mainwindow.h ../ifc_editor_qt/src/context_menus/context_menu.h ../ifc_editor_qt/src/context_menus/handler.h ../ifc_editor_qt/src/context_menus/scene_cm_handler.h ../ifc_editor_qt/src/context_menus/scene_context_menu.h ../ifc_editor_qt/src/system/system_binding/bspline_binding.h ../ifc_editor_qt/src/system/object_manager.h ../ifc_editor_qt/src/system/ifc_types.h ../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_bezier.h ../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_default.h ../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_factory.h ../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_point.h ../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_point_bezier.h ../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_points.h ../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_points_bezier.h ../ifc_editor_qt/src/widgets/scene_list/entities/item.h ../ifc_editor_qt/src/widgets/scene_list/entities/item_id.h ../ifc_editor_qt/src/widgets/scene_list/entities/item_id_factory.h ../ifc_editor_qt/src/widgets/scene_list/scene_tree.h ../ifc_editor_qt/src/controls.h ../ifc_editor_qt/src/editor_window.h ../ifc_editor_qt/src/glwidget.h ../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_handlers.h ../ifc_editor_qt/build/ui/ui_mainwindow.h ../ifc_editor_qt/src/widgets/scene_list/context_menus/scm_bspline.h ../ifc_editor_qt/src/system/system_binding/bspline_interp_binding.h ../ifc_editor_qt/src/objects_dialog.h ../ifc_editor_qt/src/dialogs/surface_settings_dialog.h ../ifc_editor_qt/src/dialogs/surface_c0_dialog.h ../ifc_editor_qt/src/widgets/scene_list/context_menus/scm_surfacec0.h ../ifc_editor_qt/src/system/serialization/serialization_scene.h ../ifc_editor_qt/src/system/serialization/deserialization_scene.h ../ifc_editor_qt/src/widgets/scene_list/context_menus/scm_surfaces.h ../ifc_editor_qt/src/plot/qcustomplot.h ../ifc_editor_qt/src/dialogs/intersectiondialog.h ../ifc_editor_qt/src/plot/plot_style.h ../ifc_editor_qt/src/widgets/scene_list/context_menus/scm_surfaces_fill.h ../ifc_editor_qt/src/widgets/scene_list/context_menus/scm_gregory.h ../ifc_editor_qt/src/dialogs/sphere_dialog.h ../ifc_editor_qt/src/widgets/scene_list/context_menus/scm_sphere.h ../ifc_editor_qt/src/dialogs/cloud_dialog.h ../ifc_editor_qt/src/widgets/scene_list/context_menus/scm_cloud_fitting.h ../ifc_editor_qt/src/cloud_fitting_thread.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../ifc_editor_qt/src/glwidget.cpp ../ifc_editor_qt/src/main.cpp ../ifc_editor_qt/src/controls.cpp ../ifc_editor_qt/src/context_menus/context_menu.cpp ../ifc_editor_qt/src/context_menus/handler.cpp ../ifc_editor_qt/src/editor_window.cpp ../ifc_editor_qt/src/system/object_manager.cpp ../ifc_editor_qt/src/widgets/scene_list/scene_tree.cpp ../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_factory.cpp ../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_default.cpp ../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_point.cpp ../ifc_editor_qt/src/widgets/scene_list/entities/item_id.cpp ../ifc_editor_qt/src/widgets/scene_list/entities/item.cpp ../ifc_editor_qt/src/widgets/scene_list/entities/item_id_factory.cpp ../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_points.cpp ../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_point_bezier.cpp ../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_points_bezier.cpp ../ifc_editor_qt/src/context_menus/scene_context_menu.cpp ../ifc_editor_qt/src/context_menus/scene_cm_handler.cpp ../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_bezier.cpp ../ifc_editor_qt/src/system/system_binding/bspline_binding.cpp ../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_handlers.cpp ../ifc_editor_qt/src/system/ifc_types.cpp ../ifc_editor_qt/src/widgets/scene_list/context_menus/scm_bspline.cpp ../ifc_editor_qt/src/system/system_binding/bspline_interp_binding.cpp ../ifc_editor_qt/src/objects_dialog.cpp ../ifc_editor_qt/src/dialogs/surface_settings_dialog.cpp ../ifc_editor_qt/src/dialogs/surface_c0_dialog.cpp ../ifc_editor_qt/src/widgets/scene_list/context_menus/scm_surfacec0.cpp ../ifc_editor_qt/src/system/serialization/serialization_scene.cpp ../ifc_editor_qt/src/system/serialization/deserialization_scene.cpp ../ifc_editor_qt/src/widgets/scene_list/context_menus/scm_surfaces.cpp ../ifc_editor_qt/src/plot/qcustomplot.cpp ../ifc_editor_qt/src/dialogs/intersectiondialog.cpp ../ifc_editor_qt/src/plot/plot_style.cpp ../ifc_editor_qt/src/widgets/scene_list/context_menus/scm_surfaces_fill.cpp ../ifc_editor_qt/src/widgets/scene_list/context_menus/scm_gregory.cpp ../ifc_editor_qt/src/dialogs/sphere_dialog.cpp ../ifc_editor_qt/src/widgets/scene_list/context_menus/scm_sphere.cpp ../ifc_editor_qt/src/dialogs/cloud_dialog.cpp ../ifc_editor_qt/src/widgets/scene_list/context_menus/scm_cloud_fitting.cpp ../ifc_editor_qt/src/cloud_fitting_thread.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../ifc_editor_qt/mainwindow.ui ../ifc_editor_qt/objects_dialog.ui ../ifc_editor_qt/src/dialogs/surface_settings_dialog.ui ../ifc_editor_qt/src/dialogs/surface_c0_dialog.ui ../ifc_editor_qt/src/dialogs/intersectiondialog.ui ../ifc_editor_qt/src/dialogs/sphere_dialog.ui ../ifc_editor_qt/src/dialogs/cloud_dialog.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../ifc_editor_qt/build/ui/ui_mainwindow.h ../ifc_editor_qt/src/context_menus/context_menu.h ../ifc_editor_qt/src/context_menus/handler.h ../ifc_editor_qt/src/context_menus/scene_cm_handler.h ../ifc_editor_qt/src/context_menus/scene_context_menu.h ../ifc_editor_qt/src/system/system_binding/bspline_binding.h ../ifc_editor_qt/src/system/object_manager.h ../ifc_editor_qt/src/system/ifc_types.h ../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_bezier.h ../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_default.h ../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_factory.h ../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_point.h ../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_point_bezier.h ../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_points.h ../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_points_bezier.h ../ifc_editor_qt/src/widgets/scene_list/entities/item.h ../ifc_editor_qt/src/widgets/scene_list/entities/item_id.h ../ifc_editor_qt/src/widgets/scene_list/entities/item_id_factory.h ../ifc_editor_qt/src/widgets/scene_list/scene_tree.h ../ifc_editor_qt/src/controls.h ../ifc_editor_qt/src/editor_window.h ../ifc_editor_qt/src/glwidget.h ../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_handlers.h ../ifc_editor_qt/build/ui/ui_mainwindow.h ../ifc_editor_qt/src/widgets/scene_list/context_menus/scm_bspline.h ../ifc_editor_qt/src/system/system_binding/bspline_interp_binding.h ../ifc_editor_qt/src/objects_dialog.h ../ifc_editor_qt/src/dialogs/surface_settings_dialog.h ../ifc_editor_qt/src/dialogs/surface_c0_dialog.h ../ifc_editor_qt/src/widgets/scene_list/context_menus/scm_surfacec0.h ../ifc_editor_qt/src/system/serialization/serialization_scene.h ../ifc_editor_qt/src/system/serialization/deserialization_scene.h ../ifc_editor_qt/src/widgets/scene_list/context_menus/scm_surfaces.h ../ifc_editor_qt/src/plot/qcustomplot.h ../ifc_editor_qt/src/dialogs/intersectiondialog.h ../ifc_editor_qt/src/plot/plot_style.h ../ifc_editor_qt/src/widgets/scene_list/context_menus/scm_surfaces_fill.h ../ifc_editor_qt/src/widgets/scene_list/context_menus/scm_gregory.h ../ifc_editor_qt/src/dialogs/sphere_dialog.h ../ifc_editor_qt/src/widgets/scene_list/context_menus/scm_sphere.h ../ifc_editor_qt/src/dialogs/cloud_dialog.h ../ifc_editor_qt/src/widgets/scene_list/context_menus/scm_cloud_fitting.h ../ifc_editor_qt/src/cloud_fitting_thread.h ../ifc_editor_qt/src/dialogs/gradient_descent_dialog.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../ifc_editor_qt/src/glwidget.cpp ../ifc_editor_qt/src/main.cpp ../ifc_editor_qt/src/controls.cpp ../ifc_editor_qt/src/context_menus/context_menu.cpp ../ifc_editor_qt/src/context_menus/handler.cpp ../ifc_editor_qt/src/editor_window.cpp ../ifc_editor_qt/src/system/object_manager.cpp ../ifc_editor_qt/src/widgets/scene_list/scene_tree.cpp ../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_factory.cpp ../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_default.cpp ../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_point.cpp ../ifc_editor_qt/src/widgets/scene_list/entities/item_id.cpp ../ifc_editor_qt/src/widgets/scene_list/entities/item.cpp ../ifc_editor_qt/src/widgets/scene_list/entities/item_id_factory.cpp ../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_points.cpp ../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_point_bezier.cpp ../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_points_bezier.cpp ../ifc_editor_qt/src/context_menus/scene_context_menu.cpp ../ifc_editor_qt/src/context_menus/scene_cm_handler.cpp ../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_bezier.cpp ../ifc_editor_qt/src/system/system_binding/bspline_binding.cpp ../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_handlers.cpp ../ifc_editor_qt/src/system/ifc_types.cpp ../ifc_editor_qt/src/widgets/scene_list/context_menus/scm_bspline.cpp ../ifc_editor_qt/src/system/system_binding/bspline_interp_binding.cpp ../ifc_editor_qt/src/objects_dialog.cpp ../ifc_editor_qt/src/dialogs/surface_settings_dialog.cpp ../ifc_editor_qt/src/dialogs/surface_c0_dialog.cpp ../ifc_editor_qt/src/widgets/scene_list/context_menus/scm_surfacec0.cpp ../ifc_editor_qt/src/system/serialization/serialization_scene.cpp ../ifc_editor_qt/src/system/serialization/deserialization_scene.cpp ../ifc_editor_qt/src/widgets/scene_list/context_menus/scm_surfaces.cpp ../ifc_editor_qt/src/plot/qcustomplot.cpp ../ifc_editor_qt/src/dialogs/intersectiondialog.cpp ../ifc_editor_qt/src/plot/plot_style.cpp ../ifc_editor_qt/src/widgets/scene_list/context_menus/scm_surfaces_fill.cpp ../ifc_editor_qt/src/widgets/scene_list/context_menus/scm_gregory.cpp ../ifc_editor_qt/src/dialogs/sphere_dialog.cpp ../ifc_editor_qt/src/widgets/scene_list/context_menus/scm_sphere.cpp ../ifc_editor_qt/src/dialogs/cloud_dialog.cpp ../ifc_editor_qt/src/widgets/scene_list/context_menus/scm_cloud_fitting.cpp ../ifc_editor_qt/src/cloud_fitting_thread.cpp ../ifc_editor_qt/src/dialogs/gradient_descent_dialog.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../ifc_editor_qt/mainwindow.ui ../ifc_editor_qt/objects_dialog.ui ../ifc_editor_qt/src/dialogs/surface_settings_dialog.ui ../ifc_editor_qt/src/dialogs/surface_c0_dialog.ui ../ifc_editor_qt/src/dialogs/intersectiondialog.ui ../ifc_editor_qt/src/dialogs/sphere_dialog.ui ../ifc_editor_qt/src/dialogs/cloud_dialog.ui ../ifc_editor_qt/src/dialogs/gradient_descent_dialog.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -808,9 +814,9 @@ build/rcc/qrc_style.cpp: ../ifc_editor_qt/qdarkstyle/style.qrc \
 		../ifc_editor_qt/qdarkstyle/style.qss
 	@echo rcc ../ifc_editor_qt/qdarkstyle/style.qrc && /home/jakub/ide/qt/5.5/gcc_64/bin/rcc -name style ../ifc_editor_qt/qdarkstyle/style.qrc -o build/rcc/qrc_style.cpp
 
-compiler_moc_header_make_all: build/moc/moc_scene_tree.cpp build/moc/moc_editor_window.cpp build/moc/moc_glwidget.cpp build/moc/moc_objects_dialog.cpp build/moc/moc_surface_settings_dialog.cpp build/moc/moc_surface_c0_dialog.cpp build/moc/moc_qcustomplot.cpp build/moc/moc_intersectiondialog.cpp build/moc/moc_sphere_dialog.cpp build/moc/moc_cloud_dialog.cpp
+compiler_moc_header_make_all: build/moc/moc_scene_tree.cpp build/moc/moc_editor_window.cpp build/moc/moc_glwidget.cpp build/moc/moc_objects_dialog.cpp build/moc/moc_surface_settings_dialog.cpp build/moc/moc_surface_c0_dialog.cpp build/moc/moc_qcustomplot.cpp build/moc/moc_intersectiondialog.cpp build/moc/moc_sphere_dialog.cpp build/moc/moc_cloud_dialog.cpp build/moc/moc_gradient_descent_dialog.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) build/moc/moc_scene_tree.cpp build/moc/moc_editor_window.cpp build/moc/moc_glwidget.cpp build/moc/moc_objects_dialog.cpp build/moc/moc_surface_settings_dialog.cpp build/moc/moc_surface_c0_dialog.cpp build/moc/moc_qcustomplot.cpp build/moc/moc_intersectiondialog.cpp build/moc/moc_sphere_dialog.cpp build/moc/moc_cloud_dialog.cpp
+	-$(DEL_FILE) build/moc/moc_scene_tree.cpp build/moc/moc_editor_window.cpp build/moc/moc_glwidget.cpp build/moc/moc_objects_dialog.cpp build/moc/moc_surface_settings_dialog.cpp build/moc/moc_surface_c0_dialog.cpp build/moc/moc_qcustomplot.cpp build/moc/moc_intersectiondialog.cpp build/moc/moc_sphere_dialog.cpp build/moc/moc_cloud_dialog.cpp build/moc/moc_gradient_descent_dialog.cpp
 build/moc/moc_scene_tree.cpp: ../../../../ide/qt/5.5/gcc_64/include/QtCore/QObject \
 		../../../../ide/qt/5.5/gcc_64/include/QtCore/qobject.h \
 		../../../../ide/qt/5.5/gcc_64/include/QtCore/qobjectdefs.h \
@@ -2792,11 +2798,117 @@ build/moc/moc_cloud_dialog.cpp: ../../../../ide/qt/5.5/gcc_64/include/QtWidgets/
 		../ifc_editor_qt/src/dialogs/cloud_dialog.h
 	@echo moc ../ifc_editor_qt/src/dialogs/cloud_dialog.h && /home/jakub/ide/qt/5.5/gcc_64/bin/moc $(DEFINES) -I/home/jakub/ide/qt/5.5/gcc_64/mkspecs/linux-g++ -I/home/jakub/programming/cloud_fitting/apps/ifc_editor_qt -I/home/jakub/programming/cloud_fitting/apps/ifc_editor_qt/include -I/home/jakub/programming/cloud_fitting/apps/ifc_editor_qt/src -I/home/jakub/programming/cloud_fitting/dependencies/include/fitting -I/home/jakub/programming/cloud_fitting/dependencies/include/ifc -I/home/jakub/programming/cloud_fitting/dependencies/include/ifcgpu -I/home/jakub/programming/cloud_fitting/dependencies/include/glm -I/home/jakub/programming/cloud_fitting/dependencies/include/rc -I/home/jakub/programming/cloud_fitting/dependencies/include/math -I/home/jakub/programming/cloud_fitting/dependencies/include/strings -I/home/jakub/programming/cloud_fitting/dependencies/include/parallel -I/home/jakub/programming/cloud_fitting/dependencies/include/pso -I/home/jakub/programming/cloud_fitting/dependencies/include/time -I/home/jakub/ide/qt/5.5/gcc_64/include -I/home/jakub/ide/qt/5.5/gcc_64/include/QtOpenGL -I/home/jakub/ide/qt/5.5/gcc_64/include/QtPrintSupport -I/home/jakub/ide/qt/5.5/gcc_64/include/QtWidgets -I/home/jakub/ide/qt/5.5/gcc_64/include/QtGui -I/home/jakub/ide/qt/5.5/gcc_64/include/QtCore -I. ../ifc_editor_qt/src/dialogs/cloud_dialog.h -o build/moc/moc_cloud_dialog.cpp
 
+build/moc/moc_gradient_descent_dialog.cpp: ../../../../ide/qt/5.5/gcc_64/include/QtWidgets/QDialog \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qdialog.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qwidget.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qwindowdefs.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qglobal.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qconfig.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qfeatures.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qtypetraits.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qsysinfo.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qlogging.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qflags.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qatomic.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qatomic_gcc.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qatomic_armv7.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qatomic_armv6.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qatomic_armv5.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qatomic_ia64.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qatomic_mips.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qatomic_x86.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qatomic_unix.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qmutex.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qnumeric.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qnamespace.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qwindowdefs_win.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qobject.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qstring.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qchar.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qbytearray.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qrefcount.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qarraydata.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qlist.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qalgorithms.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qiterator.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qbytearraylist.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qstringlist.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qregexp.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qcoreevent.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qmetatype.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qisenum.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qobject_impl.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qmargins.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qpaintdevice.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qrect.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qsize.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qpoint.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qpalette.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qcolor.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qrgb.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qbrush.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qpair.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qvector.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qmatrix.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qpolygon.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qregion.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qdatastream.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qiodevice.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qline.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qtransform.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qpainterpath.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qimage.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qpixelformat.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qpixmap.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qsharedpointer.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qshareddata.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qhash.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qfont.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qfontmetrics.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qfontinfo.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qsizepolicy.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qcursor.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qkeysequence.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qevent.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qvariant.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qmap.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qdebug.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qtextstream.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qlocale.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qset.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qurl.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qurlquery.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qfile.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qfiledevice.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qvector2d.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qtouchdevice.h \
+		../ifc_editor_qt/src/dialogs/gradient_descent_dialog.h
+	@echo moc ../ifc_editor_qt/src/dialogs/gradient_descent_dialog.h && /home/jakub/ide/qt/5.5/gcc_64/bin/moc $(DEFINES) -I/home/jakub/ide/qt/5.5/gcc_64/mkspecs/linux-g++ -I/home/jakub/programming/cloud_fitting/apps/ifc_editor_qt -I/home/jakub/programming/cloud_fitting/apps/ifc_editor_qt/include -I/home/jakub/programming/cloud_fitting/apps/ifc_editor_qt/src -I/home/jakub/programming/cloud_fitting/dependencies/include/fitting -I/home/jakub/programming/cloud_fitting/dependencies/include/ifc -I/home/jakub/programming/cloud_fitting/dependencies/include/ifcgpu -I/home/jakub/programming/cloud_fitting/dependencies/include/glm -I/home/jakub/programming/cloud_fitting/dependencies/include/rc -I/home/jakub/programming/cloud_fitting/dependencies/include/math -I/home/jakub/programming/cloud_fitting/dependencies/include/strings -I/home/jakub/programming/cloud_fitting/dependencies/include/parallel -I/home/jakub/programming/cloud_fitting/dependencies/include/pso -I/home/jakub/programming/cloud_fitting/dependencies/include/time -I/home/jakub/ide/qt/5.5/gcc_64/include -I/home/jakub/ide/qt/5.5/gcc_64/include/QtOpenGL -I/home/jakub/ide/qt/5.5/gcc_64/include/QtPrintSupport -I/home/jakub/ide/qt/5.5/gcc_64/include/QtWidgets -I/home/jakub/ide/qt/5.5/gcc_64/include/QtGui -I/home/jakub/ide/qt/5.5/gcc_64/include/QtCore -I. ../ifc_editor_qt/src/dialogs/gradient_descent_dialog.h -o build/moc/moc_gradient_descent_dialog.cpp
+
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: build/ui/ui_mainwindow.h build/ui/ui_objects_dialog.h build/ui/ui_surface_settings_dialog.h build/ui/ui_surface_c0_dialog.h build/ui/ui_intersectiondialog.h build/ui/ui_sphere_dialog.h build/ui/ui_cloud_dialog.h
+compiler_uic_make_all: build/ui/ui_mainwindow.h build/ui/ui_objects_dialog.h build/ui/ui_surface_settings_dialog.h build/ui/ui_surface_c0_dialog.h build/ui/ui_intersectiondialog.h build/ui/ui_sphere_dialog.h build/ui/ui_cloud_dialog.h build/ui/ui_gradient_descent_dialog.h
 compiler_uic_clean:
-	-$(DEL_FILE) build/ui/ui_mainwindow.h build/ui/ui_objects_dialog.h build/ui/ui_surface_settings_dialog.h build/ui/ui_surface_c0_dialog.h build/ui/ui_intersectiondialog.h build/ui/ui_sphere_dialog.h build/ui/ui_cloud_dialog.h
+	-$(DEL_FILE) build/ui/ui_mainwindow.h build/ui/ui_objects_dialog.h build/ui/ui_surface_settings_dialog.h build/ui/ui_surface_c0_dialog.h build/ui/ui_intersectiondialog.h build/ui/ui_sphere_dialog.h build/ui/ui_cloud_dialog.h build/ui/ui_gradient_descent_dialog.h
 build/ui/ui_mainwindow.h: ../ifc_editor_qt/mainwindow.ui \
 		../ifc_editor_qt/src/glwidget.h \
 		../ifc_editor_qt/src/widgets/scene_list/scene_tree.h \
@@ -3935,6 +4047,9 @@ build/ui/ui_sphere_dialog.h: ../ifc_editor_qt/src/dialogs/sphere_dialog.ui
 build/ui/ui_cloud_dialog.h: ../ifc_editor_qt/src/dialogs/cloud_dialog.ui
 	@echo uic ../ifc_editor_qt/src/dialogs/cloud_dialog.ui && /home/jakub/ide/qt/5.5/gcc_64/bin/uic ../ifc_editor_qt/src/dialogs/cloud_dialog.ui -o build/ui/ui_cloud_dialog.h
 
+build/ui/ui_gradient_descent_dialog.h: ../ifc_editor_qt/src/dialogs/gradient_descent_dialog.ui
+	@echo uic ../ifc_editor_qt/src/dialogs/gradient_descent_dialog.ui && /home/jakub/ide/qt/5.5/gcc_64/bin/uic ../ifc_editor_qt/src/dialogs/gradient_descent_dialog.ui -o build/ui/ui_gradient_descent_dialog.h
+
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
 compiler_yacc_impl_make_all:
@@ -4419,6 +4534,8 @@ build/obj/glwidget.o: ../ifc_editor_qt/src/glwidget.cpp ../ifc_editor_qt/src/edi
 		../ifc_editor_qt/src/system/object_manager.h \
 		../ifc_editor_qt/src/system/system_binding/bspline_binding.h \
 		../ifc_editor_qt/src/system/system_binding/bspline_interp_binding.h \
+		../ifc_editor_qt/src/cloud_fitting_thread.h \
+		../../dependencies/include/fitting/fitting/cloud_fitter.h \
 		../ifc_editor_qt/build/ui/ui_mainwindow.h \
 		../../../../ide/qt/5.5/gcc_64/include/QtCore/QVariant \
 		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/QAction \
@@ -4915,6 +5032,8 @@ build/obj/main.o: ../ifc_editor_qt/src/main.cpp ../ifc_editor_qt/src/editor_wind
 		../../dependencies/include/ifc/infinity_cad/rendering/render_objects/curves/intersection_curve.h \
 		../../dependencies/include/ifc/infinity_cad/geometry/filling/surface_filling.h \
 		../../dependencies/include/ifc/infinity_cad/rendering/render_objects/primitivies/sphere.h \
+		../ifc_editor_qt/src/cloud_fitting_thread.h \
+		../../dependencies/include/fitting/fitting/cloud_fitter.h \
 		../ifc_editor_qt/build/ui/ui_mainwindow.h \
 		../../../../ide/qt/5.5/gcc_64/include/QtCore/QVariant \
 		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/QAction \
@@ -5598,6 +5717,8 @@ build/obj/editor_window.o: ../ifc_editor_qt/src/editor_window.cpp ../ifc_editor_
 		../../dependencies/include/ifc/infinity_cad/rendering/render_objects/curves/intersection_curve.h \
 		../../dependencies/include/ifc/infinity_cad/geometry/filling/surface_filling.h \
 		../../dependencies/include/ifc/infinity_cad/rendering/render_objects/primitivies/sphere.h \
+		../ifc_editor_qt/src/cloud_fitting_thread.h \
+		../../dependencies/include/fitting/fitting/cloud_fitter.h \
 		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/QMessageBox \
 		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qmessagebox.h \
 		../../../../ide/qt/5.5/gcc_64/include/QtCore/QDebug \
@@ -6066,10 +6187,13 @@ build/obj/object_manager.o: ../ifc_editor_qt/src/system/object_manager.cpp ../if
 		../../dependencies/include/ifc/infinity_cad/rendering/render_objects/curves/intersection_curve.h \
 		../../dependencies/include/ifc/infinity_cad/geometry/filling/surface_filling.h \
 		../../dependencies/include/ifc/infinity_cad/rendering/render_objects/primitivies/sphere.h \
+		../ifc_editor_qt/src/cloud_fitting_thread.h \
+		../../dependencies/include/fitting/fitting/cloud_fitter.h \
 		../../dependencies/include/ifc/infinity_cad/rendering/color/color_settings.h \
 		../ifc_editor_qt/src/dialogs/surface_c0_dialog.h \
 		../ifc_editor_qt/src/dialogs/sphere_dialog.h \
 		../ifc_editor_qt/src/dialogs/cloud_dialog.h \
+		../ifc_editor_qt/src/dialogs/gradient_descent_dialog.h \
 		../ifc_editor_qt/build/ui/ui_mainwindow.h \
 		../../../../ide/qt/5.5/gcc_64/include/QtCore/QVariant \
 		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/QAction \
@@ -6703,6 +6827,8 @@ build/obj/scene_tree.o: ../ifc_editor_qt/src/widgets/scene_list/scene_tree.cpp .
 		../../dependencies/include/ifc/infinity_cad/rendering/render_objects/curves/intersection_curve.h \
 		../../dependencies/include/ifc/infinity_cad/geometry/filling/surface_filling.h \
 		../../dependencies/include/ifc/infinity_cad/rendering/render_objects/primitivies/sphere.h \
+		../ifc_editor_qt/src/cloud_fitting_thread.h \
+		../../dependencies/include/fitting/fitting/cloud_fitter.h \
 		../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_factory.h \
 		../ifc_editor_qt/src/context_menus/scene_context_menu.h \
 		../ifc_editor_qt/src/context_menus/scene_cm_handler.h \
@@ -7665,6 +7791,8 @@ build/obj/scene_cmenu_point.o: ../ifc_editor_qt/src/widgets/scene_list/context_m
 		../../dependencies/include/ifc/infinity_cad/rendering/render_objects/curves/intersection_curve.h \
 		../../dependencies/include/ifc/infinity_cad/geometry/filling/surface_filling.h \
 		../../dependencies/include/ifc/infinity_cad/rendering/render_objects/primitivies/sphere.h \
+		../ifc_editor_qt/src/cloud_fitting_thread.h \
+		../../dependencies/include/fitting/fitting/cloud_fitter.h \
 		../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_point.h \
 		../ifc_editor_qt/src/context_menus/scene_context_menu.h \
 		../ifc_editor_qt/src/context_menus/scene_cm_handler.h \
@@ -8132,7 +8260,9 @@ build/obj/item.o: ../ifc_editor_qt/src/widgets/scene_list/entities/item.cpp ../i
 		../../dependencies/include/ifc/infinity_cad/rendering/render_objects/surfaces/surface_c2_cylind.h \
 		../../dependencies/include/ifc/infinity_cad/rendering/render_objects/curves/intersection_curve.h \
 		../../dependencies/include/ifc/infinity_cad/geometry/filling/surface_filling.h \
-		../../dependencies/include/ifc/infinity_cad/rendering/render_objects/primitivies/sphere.h
+		../../dependencies/include/ifc/infinity_cad/rendering/render_objects/primitivies/sphere.h \
+		../ifc_editor_qt/src/cloud_fitting_thread.h \
+		../../dependencies/include/fitting/fitting/cloud_fitter.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/item.o ../ifc_editor_qt/src/widgets/scene_list/entities/item.cpp
 
 build/obj/item_id_factory.o: ../ifc_editor_qt/src/widgets/scene_list/entities/item_id_factory.cpp 
@@ -8600,6 +8730,8 @@ build/obj/scene_cmenu_points.o: ../ifc_editor_qt/src/widgets/scene_list/context_
 		../../dependencies/include/ifc/infinity_cad/rendering/render_objects/curves/intersection_curve.h \
 		../../dependencies/include/ifc/infinity_cad/geometry/filling/surface_filling.h \
 		../../dependencies/include/ifc/infinity_cad/rendering/render_objects/primitivies/sphere.h \
+		../ifc_editor_qt/src/cloud_fitting_thread.h \
+		../../dependencies/include/fitting/fitting/cloud_fitter.h \
 		../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_handlers.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/scene_cmenu_points.o ../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_points.cpp
 
@@ -9284,6 +9416,8 @@ build/obj/scene_cmenu_points_bezier.o: ../ifc_editor_qt/src/widgets/scene_list/c
 		../../dependencies/include/ifc/infinity_cad/rendering/render_objects/curves/intersection_curve.h \
 		../../dependencies/include/ifc/infinity_cad/geometry/filling/surface_filling.h \
 		../../dependencies/include/ifc/infinity_cad/rendering/render_objects/primitivies/sphere.h \
+		../ifc_editor_qt/src/cloud_fitting_thread.h \
+		../../dependencies/include/fitting/fitting/cloud_fitter.h \
 		../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_handlers.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/scene_cmenu_points_bezier.o ../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_points_bezier.cpp
 
@@ -10170,7 +10304,9 @@ build/obj/scene_cmenu_bezier.o: ../ifc_editor_qt/src/widgets/scene_list/context_
 		../../dependencies/include/ifc/infinity_cad/rendering/render_objects/surfaces/surface_c2_cylind.h \
 		../../dependencies/include/ifc/infinity_cad/rendering/render_objects/curves/intersection_curve.h \
 		../../dependencies/include/ifc/infinity_cad/geometry/filling/surface_filling.h \
-		../../dependencies/include/ifc/infinity_cad/rendering/render_objects/primitivies/sphere.h
+		../../dependencies/include/ifc/infinity_cad/rendering/render_objects/primitivies/sphere.h \
+		../ifc_editor_qt/src/cloud_fitting_thread.h \
+		../../dependencies/include/fitting/fitting/cloud_fitter.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/scene_cmenu_bezier.o ../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_bezier.cpp
 
 build/obj/bspline_binding.o: ../ifc_editor_qt/src/system/system_binding/bspline_binding.cpp ../ifc_editor_qt/src/system/system_binding/bspline_binding.h \
@@ -10631,7 +10767,9 @@ build/obj/bspline_binding.o: ../ifc_editor_qt/src/system/system_binding/bspline_
 		../../dependencies/include/ifc/infinity_cad/rendering/render_objects/surfaces/surface_c2_cylind.h \
 		../../dependencies/include/ifc/infinity_cad/rendering/render_objects/curves/intersection_curve.h \
 		../../dependencies/include/ifc/infinity_cad/geometry/filling/surface_filling.h \
-		../../dependencies/include/ifc/infinity_cad/rendering/render_objects/primitivies/sphere.h
+		../../dependencies/include/ifc/infinity_cad/rendering/render_objects/primitivies/sphere.h \
+		../ifc_editor_qt/src/cloud_fitting_thread.h \
+		../../dependencies/include/fitting/fitting/cloud_fitter.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/bspline_binding.o ../ifc_editor_qt/src/system/system_binding/bspline_binding.cpp
 
 build/obj/scene_cmenu_handlers.o: ../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_handlers.cpp ../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_handlers.h \
@@ -11096,7 +11234,8 @@ build/obj/scene_cmenu_handlers.o: ../ifc_editor_qt/src/widgets/scene_list/contex
 		../../dependencies/include/ifc/infinity_cad/rendering/render_objects/curves/intersection_curve.h \
 		../../dependencies/include/ifc/infinity_cad/geometry/filling/surface_filling.h \
 		../../dependencies/include/ifc/infinity_cad/rendering/render_objects/primitivies/sphere.h \
-		../ifc_editor_qt/src/cloud_fitting_thread.h
+		../ifc_editor_qt/src/cloud_fitting_thread.h \
+		../../dependencies/include/fitting/fitting/cloud_fitter.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/scene_cmenu_handlers.o ../ifc_editor_qt/src/widgets/scene_list/context_menus/scene_cmenu_handlers.cpp
 
 build/obj/ifc_types.o: ../ifc_editor_qt/src/system/ifc_types.cpp ../ifc_editor_qt/src/system/ifc_types.h
@@ -11777,7 +11916,9 @@ build/obj/bspline_interp_binding.o: ../ifc_editor_qt/src/system/system_binding/b
 		../../dependencies/include/ifc/infinity_cad/rendering/render_objects/surfaces/surface_c2_cylind.h \
 		../../dependencies/include/ifc/infinity_cad/rendering/render_objects/curves/intersection_curve.h \
 		../../dependencies/include/ifc/infinity_cad/geometry/filling/surface_filling.h \
-		../../dependencies/include/ifc/infinity_cad/rendering/render_objects/primitivies/sphere.h
+		../../dependencies/include/ifc/infinity_cad/rendering/render_objects/primitivies/sphere.h \
+		../ifc_editor_qt/src/cloud_fitting_thread.h \
+		../../dependencies/include/fitting/fitting/cloud_fitter.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/bspline_interp_binding.o ../ifc_editor_qt/src/system/system_binding/bspline_interp_binding.cpp
 
 build/obj/objects_dialog.o: ../ifc_editor_qt/src/objects_dialog.cpp ../ifc_editor_qt/src/objects_dialog.h \
@@ -12264,7 +12405,9 @@ build/obj/objects_dialog.o: ../ifc_editor_qt/src/objects_dialog.cpp ../ifc_edito
 		../../dependencies/include/ifc/infinity_cad/rendering/render_objects/surfaces/surface_c2_cylind.h \
 		../../dependencies/include/ifc/infinity_cad/rendering/render_objects/curves/intersection_curve.h \
 		../../dependencies/include/ifc/infinity_cad/geometry/filling/surface_filling.h \
-		../../dependencies/include/ifc/infinity_cad/rendering/render_objects/primitivies/sphere.h
+		../../dependencies/include/ifc/infinity_cad/rendering/render_objects/primitivies/sphere.h \
+		../ifc_editor_qt/src/cloud_fitting_thread.h \
+		../../dependencies/include/fitting/fitting/cloud_fitter.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/objects_dialog.o ../ifc_editor_qt/src/objects_dialog.cpp
 
 build/obj/surface_settings_dialog.o: ../ifc_editor_qt/src/dialogs/surface_settings_dialog.cpp ../ifc_editor_qt/src/dialogs/surface_settings_dialog.h \
@@ -13533,7 +13676,9 @@ build/obj/deserialization_scene.o: ../ifc_editor_qt/src/system/serialization/des
 		../../dependencies/include/ifc/infinity_cad/rendering/visibility/mouse_tracker.h \
 		../ifc_editor_qt/src/widgets/scene_list/scene_tree.h \
 		../ifc_editor_qt/src/system/system_binding/bspline_binding.h \
-		../ifc_editor_qt/src/system/system_binding/bspline_interp_binding.h
+		../ifc_editor_qt/src/system/system_binding/bspline_interp_binding.h \
+		../ifc_editor_qt/src/cloud_fitting_thread.h \
+		../../dependencies/include/fitting/fitting/cloud_fitter.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/deserialization_scene.o ../ifc_editor_qt/src/system/serialization/deserialization_scene.cpp
 
 build/obj/scm_surfaces.o: ../ifc_editor_qt/src/widgets/scene_list/context_menus/scm_surfaces.cpp ../ifc_editor_qt/src/widgets/scene_list/context_menus/scm_surfaces.h \
@@ -15726,7 +15871,58 @@ build/obj/sphere_dialog.o: ../ifc_editor_qt/src/dialogs/sphere_dialog.cpp ../ifc
 		../../../../ide/qt/5.5/gcc_64/include/QtCore/qfiledevice.h \
 		../../../../ide/qt/5.5/gcc_64/include/QtGui/qvector2d.h \
 		../../../../ide/qt/5.5/gcc_64/include/QtGui/qtouchdevice.h \
-		build/ui/ui_sphere_dialog.h
+		build/ui/ui_sphere_dialog.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/QVariant \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/QAction \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qaction.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qicon.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qactiongroup.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/QApplication \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qapplication.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qcoreapplication.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qeventloop.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qguiapplication.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qinputmethod.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/QButtonGroup \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qbuttongroup.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/QFrame \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qframe.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/QHBoxLayout \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qboxlayout.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qlayout.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qlayoutitem.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qgridlayout.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/QHeaderView \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qheaderview.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qabstractitemview.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qitemselectionmodel.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qstyleoption.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qvalidator.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qregularexpression.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qslider.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qstyle.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qtabbar.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qtabwidget.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qrubberband.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/QLabel \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qlabel.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/QLineEdit \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qlineedit.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qtextcursor.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qtextformat.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qpen.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qtextoption.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/QPushButton \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qpushbutton.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qabstractbutton.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/QSpacerItem \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/QVBoxLayout
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/sphere_dialog.o ../ifc_editor_qt/src/dialogs/sphere_dialog.cpp
 
 build/obj/scm_sphere.o: ../ifc_editor_qt/src/widgets/scene_list/context_menus/scm_sphere.cpp ../ifc_editor_qt/src/widgets/scene_list/context_menus/scm_sphere.h \
@@ -16050,7 +16246,58 @@ build/obj/cloud_dialog.o: ../ifc_editor_qt/src/dialogs/cloud_dialog.cpp ../ifc_e
 		../../../../ide/qt/5.5/gcc_64/include/QtCore/qfiledevice.h \
 		../../../../ide/qt/5.5/gcc_64/include/QtGui/qvector2d.h \
 		../../../../ide/qt/5.5/gcc_64/include/QtGui/qtouchdevice.h \
-		build/ui/ui_cloud_dialog.h
+		build/ui/ui_cloud_dialog.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/QVariant \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/QAction \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qaction.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qicon.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qactiongroup.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/QApplication \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qapplication.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qcoreapplication.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qeventloop.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qguiapplication.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qinputmethod.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/QButtonGroup \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qbuttongroup.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/QFrame \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qframe.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/QHBoxLayout \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qboxlayout.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qlayout.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qlayoutitem.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qgridlayout.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/QHeaderView \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qheaderview.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qabstractitemview.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qitemselectionmodel.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qstyleoption.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qvalidator.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qregularexpression.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qslider.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qstyle.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qtabbar.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qtabwidget.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qrubberband.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/QLabel \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qlabel.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/QLineEdit \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qlineedit.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qtextcursor.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qtextformat.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qpen.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qtextoption.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/QPushButton \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qpushbutton.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qabstractbutton.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/QSpacerItem \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/QVBoxLayout
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/cloud_dialog.o ../ifc_editor_qt/src/dialogs/cloud_dialog.cpp
 
 build/obj/scm_cloud_fitting.o: ../ifc_editor_qt/src/widgets/scene_list/context_menus/scm_cloud_fitting.cpp ../ifc_editor_qt/src/widgets/scene_list/context_menus/scm_cloud_fitting.h \
@@ -16539,6 +16786,113 @@ build/obj/cloud_fitting_thread.o: ../ifc_editor_qt/src/cloud_fitting_thread.cpp 
 		../../dependencies/include/fitting/fitting/cloud_fitter.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/cloud_fitting_thread.o ../ifc_editor_qt/src/cloud_fitting_thread.cpp
 
+build/obj/gradient_descent_dialog.o: ../ifc_editor_qt/src/dialogs/gradient_descent_dialog.cpp ../ifc_editor_qt/src/dialogs/gradient_descent_dialog.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/QDialog \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qdialog.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qwidget.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qwindowdefs.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qglobal.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qconfig.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qfeatures.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qtypetraits.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qsysinfo.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qlogging.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qflags.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qatomic.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qatomic_gcc.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qatomic_armv7.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qatomic_armv6.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qatomic_armv5.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qatomic_ia64.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qatomic_mips.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qatomic_x86.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qatomic_unix.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qmutex.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qnumeric.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qnamespace.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qwindowdefs_win.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qobject.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qstring.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qchar.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qbytearray.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qrefcount.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qarraydata.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qlist.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qalgorithms.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qiterator.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qbytearraylist.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qstringlist.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qregexp.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qcoreevent.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qmetatype.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qisenum.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qobject_impl.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qmargins.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qpaintdevice.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qrect.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qsize.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qpoint.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qpalette.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qcolor.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qrgb.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qbrush.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qpair.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qvector.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qmatrix.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qpolygon.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qregion.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qdatastream.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qiodevice.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qline.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qtransform.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qpainterpath.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qimage.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qpixelformat.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qpixmap.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qsharedpointer.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qshareddata.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qhash.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qfont.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qfontmetrics.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qfontinfo.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtWidgets/qsizepolicy.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qcursor.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qkeysequence.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qevent.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qvariant.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qmap.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qdebug.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qtextstream.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qlocale.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qset.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qurl.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qurlquery.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qfile.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtCore/qfiledevice.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qvector2d.h \
+		../../../../ide/qt/5.5/gcc_64/include/QtGui/qtouchdevice.h \
+		build/ui/ui_gradient_descent_dialog.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/gradient_descent_dialog.o ../ifc_editor_qt/src/dialogs/gradient_descent_dialog.cpp
+
 build/obj/qrc_icons.o: build/rcc/qrc_icons.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/qrc_icons.o build/rcc/qrc_icons.cpp
 
@@ -16574,6 +16928,9 @@ build/obj/moc_sphere_dialog.o: build/moc/moc_sphere_dialog.cpp
 
 build/obj/moc_cloud_dialog.o: build/moc/moc_cloud_dialog.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_cloud_dialog.o build/moc/moc_cloud_dialog.cpp
+
+build/obj/moc_gradient_descent_dialog.o: build/moc/moc_gradient_descent_dialog.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_gradient_descent_dialog.o build/moc/moc_gradient_descent_dialog.cpp
 
 ####### Install
 

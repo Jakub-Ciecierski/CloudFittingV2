@@ -103,7 +103,8 @@ void Sphere::initEdges() {
 //-----------------------//
 
 Cloud* Sphere::extractRandomCloud(int verticesCount,
-                                  float sDivider, float rDivider){
+                                  float sDivider, float rDivider,
+                                  float distortion){
     rnd::seed();
 
     vector<vec4> points(verticesCount);
@@ -121,7 +122,7 @@ Cloud* Sphere::extractRandomCloud(int verticesCount,
         float z = getZ(s,r);
 
         float minDistortion = 0.0;
-        float maxDistortion = 0.5;
+        float maxDistortion = distortion;
         float xDist = rnd::generateRandomNumber(minDistortion, maxDistortion);
         float yDist = rnd::generateRandomNumber(minDistortion, maxDistortion);
         float zDist = rnd::generateRandomNumber(minDistortion, maxDistortion);

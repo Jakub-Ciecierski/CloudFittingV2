@@ -11,6 +11,7 @@ struct CloudData{
     int verticesCount;
     float ringsDivider;
     float sectionsDivider;
+    float distortion;
 };
 
 class CloudDialog : public QDialog

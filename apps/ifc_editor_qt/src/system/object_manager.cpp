@@ -6,6 +6,7 @@
 #include <dialogs/surface_c0_dialog.h>
 #include <dialogs/sphere_dialog.h>
 #include <dialogs/cloud_dialog.h>
+#include <dialogs/gradient_descent_dialog.h>
 #include <ui_mainwindow.h>
 
 #include <system/serialization/serialization_scene.h>
@@ -86,7 +87,8 @@ Item * ObjectManager::addCloud(Sphere* sphere){
         CloudData data = dialog.getData();
         Cloud* cloud = sphere->extractRandomCloud(data.verticesCount,
                                                   data.sectionsDivider,
-                                                  data.ringsDivider);
+                                                  data.ringsDivider,
+                                                  data.distortion);
 
         this->scene->addRenderObject(cloud);
         Item* item = sceneTree->addObject(cloud, RB_CLOUD_TYPE);
@@ -457,9 +459,26 @@ void ObjectManager::startCloudFittingPSO(Cloud* cloud, Sphere* sphere){
 }
 
 void ObjectManager::startCloudFittingGradient(Cloud* cloud, Sphere* sphere){
+    GradientDescentDialog dialog;
+
+    dialog.exec();
+    bool result = dialog.getResult();
+    GradientParams params;
+    if(result){
+        GradientDescentData data = dialog.getData();
+
+        params.max_iterations = data.max_iter;
+        params.learning_rate = data.learning_rate;
+        params.translation_weight = data.translation_weight;
+        params.rotation_weight = data.rotation_weight;
+    }else{
+        return;
+    }
+
     cloudFittingThread.setCloud(cloud);
     cloudFittingThread.setSphere(sphere);
     cloudFittingThread.setType(CloudFittingAlgorithm::GRADIENT_DESCENT);
+    cloudFittingThread.setGradientParams(params);
 
     cloudFittingThread.start();
 }

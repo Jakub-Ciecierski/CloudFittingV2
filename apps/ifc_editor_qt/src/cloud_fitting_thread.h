@@ -19,10 +19,13 @@ public:
     void setSphere(Sphere* sphere);
 
     void setType(CloudFittingAlgorithm algorithm_type);
+    void setGradientParams(GradientParams params);
 
 private:
     Cloud* cloud;
     Sphere* sphere;
+
+    GradientParams params;
 
     CloudFittingAlgorithm algorithm_type;
 };

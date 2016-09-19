@@ -11,6 +11,9 @@ GradientDescent::GradientDescent(Cloud* cloud,
     params_(params),
     last_value_(99999){
 
+    //theta_.translation = cloud->getPosition();
+    //theta_.rotation = cloud->getRotations();
+    last_theta_ = theta_;
 }
 
 GradientDescent::~GradientDescent(){
@@ -19,27 +22,25 @@ GradientDescent::~GradientDescent(){
 
 GradientTheta GradientDescent::RunGradient(){
     for(int i = 0; i < params_.max_iterations; i++){
-        if(!RunIteration()){
-            std::cout << "Converged" << std::endl;
+        if(!RunIteration())
             break;
-        }
     }
 
+    std::cout << "GradientDescent Finished" << std::endl;
     return theta_;
 }
 
 bool GradientDescent::RunIteration(){
-    UpdateCloud();
+    UpdateCloud(theta_);
     ComputeAndUpdateGradient();
 
-    float goal_value = ComputeGoalFunction();
+    double goal_value = ComputeGoalFunction(theta_);
     std::cout << goal_value << std::endl;
 
     if(goal_value >= last_value_) {
-        std::cout << "Reseting Iteration" << std::endl;
-        params_.learning_rate /= 2;
+        params_.learning_rate -= 0.000001;
         theta_ = last_theta_;
-        if(params_.learning_rate < 0.001)
+        if(params_.learning_rate <= 0)
             return false;
     }else{
         last_value_ = goal_value;
@@ -49,9 +50,10 @@ bool GradientDescent::RunIteration(){
     return true;
 }
 
-void GradientDescent::UpdateCloud(){
-    cloud_->moveTo(theta_.translation);
-    cloud_->rotateTo(theta_.rotation);
+void GradientDescent::UpdateCloud(const GradientTheta& theta){
+    cloud_->moveTo(theta.translation);
+    cloud_->rotateTo(theta.rotation);
+    cloud_->update();
 }
 
 void GradientDescent::ComputeAndUpdateGradient(){
@@ -73,11 +75,11 @@ void GradientDescent::ComputeAndUpdateGradient(){
             (params_.learning_rate * ComputeGradientRotationZ(tmp_theta));
 }
 
-float GradientDescent::ComputeGradientTranslationX(const GradientTheta& theta){
+double GradientDescent::ComputeGradientTranslationX(const GradientTheta& theta){
     const std::vector<glm::vec4>& points
             = cloud_->getWorldVertices();
-    float translation_sum = 0;
-    float rotation_sum = 0;
+    double translation_sum = 0;
+    double rotation_sum = 0;
 
     for(unsigned int i = 0; i < points.size(); i++){
         glm::vec3 point = ifc::toVec3(points[i]);
@@ -97,11 +99,11 @@ float GradientDescent::ComputeGradientTranslationX(const GradientTheta& theta){
     return translation_sum + rotation_sum;
 }
 
-float GradientDescent::ComputeGradientTranslationY(const GradientTheta& theta){
+double GradientDescent::ComputeGradientTranslationY(const GradientTheta& theta){
     const std::vector<glm::vec4>& points
             = cloud_->getWorldVertices();
-    float translation_sum = 0;
-    float rotation_sum = 0;
+    double translation_sum = 0;
+    double rotation_sum = 0;
 
     for(unsigned int i = 0; i < points.size(); i++){
         glm::vec3 point = ifc::toVec3(points[i]);
@@ -121,11 +123,11 @@ float GradientDescent::ComputeGradientTranslationY(const GradientTheta& theta){
     return translation_sum + rotation_sum;
 }
 
-float GradientDescent::ComputeGradientTranslationZ(const GradientTheta& theta){
+double GradientDescent::ComputeGradientTranslationZ(const GradientTheta& theta){
     const std::vector<glm::vec4>& points
             = cloud_->getWorldVertices();
-    float translation_sum = 0;
-    float rotation_sum = 0;
+    double translation_sum = 0;
+    double rotation_sum = 0;
 
     for(unsigned int i = 0; i < points.size(); i++){
         glm::vec3 point = ifc::toVec3(points[i]);
@@ -145,11 +147,11 @@ float GradientDescent::ComputeGradientTranslationZ(const GradientTheta& theta){
     return translation_sum + rotation_sum;
 }
 
-float GradientDescent::ComputeGradientRotationX(const GradientTheta& theta){
+double GradientDescent::ComputeGradientRotationX(const GradientTheta& theta){
     const std::vector<glm::vec4>& points
             = cloud_->getWorldVertices();
-    float translation_sum = 0;
-    float rotation_sum = 0;
+    double translation_sum = 0;
+    double rotation_sum = 0;
 
     for(unsigned int i = 0; i < points.size(); i++){
         // Translation
@@ -181,11 +183,11 @@ float GradientDescent::ComputeGradientRotationX(const GradientTheta& theta){
     return translation_sum + rotation_sum;
 }
 
-float GradientDescent::ComputeGradientRotationY(const GradientTheta& theta){
+double GradientDescent::ComputeGradientRotationY(const GradientTheta& theta){
     const std::vector<glm::vec4>& points
             = cloud_->getWorldVertices();
-    float translation_sum = 0;
-    float rotation_sum = 0;
+    double translation_sum = 0;
+    double rotation_sum = 0;
 
     for(unsigned int i = 0; i < points.size(); i++){
         // Translation
@@ -217,11 +219,11 @@ float GradientDescent::ComputeGradientRotationY(const GradientTheta& theta){
     return translation_sum + rotation_sum;
 }
 
-float GradientDescent::ComputeGradientRotationZ(const GradientTheta& theta){
+double GradientDescent::ComputeGradientRotationZ(const GradientTheta& theta){
     const std::vector<glm::vec4>& points
             = cloud_->getWorldVertices();
-    float translation_sum = 0;
-    float rotation_sum = 0;
+    double translation_sum = 0;
+    double rotation_sum = 0;
 
     for(unsigned int i = 0; i < points.size(); i++){
         // Translation
@@ -252,11 +254,16 @@ float GradientDescent::ComputeGradientRotationZ(const GradientTheta& theta){
     return translation_sum + rotation_sum;
 }
 
-float GradientDescent::ComputeGoalFunction(){
-    float sumOfDistances = 0;
-    float sumOfNormals = 0;
+double GradientDescent::ComputeGoalFunction(const GradientTheta& theta){
+    Cloud cloud_tmp = *cloud_;
+    cloud_tmp.moveTo(theta.translation);
+    cloud_tmp.rotateTo(theta.rotation);
+    cloud_tmp.update();
 
-    const std::vector<glm::vec4>& points = cloud_->getWorldVertices();
+    double sumOfDistances = 0;
+    double sumOfNormals = 0;
+
+    const std::vector<glm::vec4>& points = cloud_tmp.getWorldVertices();
     for(auto worldVertex : points){
         glm::vec3 vertex(worldVertex.x, worldVertex.y, worldVertex.z);
         glm::vec3 clostestPoint = rigid_object_->getClosestPoint(vertex);
@@ -270,14 +277,14 @@ float GradientDescent::ComputeGoalFunction(){
         glm::vec3 v = glm::vec3(v4.x, v4.y, v4.z);
         glm::vec3 clostestPoint = rigid_object_->getClosestPoint(v);
 
-        glm::vec3 cloudNormal = cloud_->getNormalAt(i);
+        glm::vec3 cloudNormal = cloud_tmp.getNormalAt(i);
         glm::vec3 sphereNormal = rigid_object_->computeNormal(clostestPoint);
 
-        float value = 1 - ifc::dot(cloudNormal, sphereNormal);
+        double value = 1 - ifc::dot(cloudNormal, sphereNormal);
         sumOfNormals += value;
     }
 
-    float goalValue = (params_.translation_weight * sumOfDistances) +
+    double goalValue = (params_.translation_weight * sumOfDistances) +
             (params_.rotation_weight * sumOfNormals);
 
     return goalValue;

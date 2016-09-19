@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>CloudDialog</class>
- <widget class="QDialog" name="CloudDialog">
+ <class>GradientDescentDialog</class>
+ <widget class="QDialog" name="GradientDescentDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -22,46 +22,11 @@
      <property name="frameShadow">
       <enum>QFrame::Raised</enum>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <layout class="QHBoxLayout" name="horizontalLayout_5">
       <item>
        <widget class="QLabel" name="label">
         <property name="text">
-         <string>Vertices Count</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="verticesCountLineEdit"/>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
-    <widget class="QFrame" name="frame_3">
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_3">
-      <item>
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>Rings Divider</string>
+         <string>Maximum Iterations</string>
         </property>
        </widget>
       </item>
@@ -79,13 +44,13 @@
        </spacer>
       </item>
       <item>
-       <widget class="QLineEdit" name="ringsDividerLineEdit"/>
+       <widget class="QLineEdit" name="maxIterLineEdit"/>
       </item>
      </layout>
     </widget>
    </item>
    <item>
-    <widget class="QFrame" name="frame_4">
+    <widget class="QFrame" name="frame_2">
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
      </property>
@@ -94,9 +59,9 @@
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_4">
       <item>
-       <widget class="QLabel" name="label_3">
+       <widget class="QLabel" name="label_2">
         <property name="text">
-         <string>Sections Divider</string>
+         <string>Learning rate</string>
         </property>
        </widget>
       </item>
@@ -114,24 +79,24 @@
        </spacer>
       </item>
       <item>
-       <widget class="QLineEdit" name="sectionsDividerLineEdit"/>
+       <widget class="QLineEdit" name="learningRateLineEdit"/>
       </item>
      </layout>
     </widget>
    </item>
    <item>
-    <widget class="QFrame" name="frame_5">
+    <widget class="QFrame" name="frame_3">
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
      </property>
      <property name="frameShadow">
       <enum>QFrame::Raised</enum>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_5">
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
       <item>
-       <widget class="QLabel" name="label_4">
+       <widget class="QLabel" name="label_3">
         <property name="text">
-         <string>Noise</string>
+         <string>Translation weight</string>
         </property>
        </widget>
       </item>
@@ -149,20 +114,27 @@
        </spacer>
       </item>
       <item>
-       <widget class="QLineEdit" name="noiseLineEdit"/>
+       <widget class="QLineEdit" name="translationWeightLineEdit"/>
       </item>
      </layout>
     </widget>
    </item>
    <item>
-    <widget class="QFrame" name="frame_2">
+    <widget class="QFrame" name="frame_4">
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
      </property>
      <property name="frameShadow">
       <enum>QFrame::Raised</enum>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout">
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>Rotation Weight</string>
+        </property>
+       </widget>
+      </item>
       <item>
        <spacer name="horizontalSpacer_5">
         <property name="orientation">
@@ -177,14 +149,42 @@
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="cancelButton">
+       <widget class="QLineEdit" name="rotationWeightLineEdit"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QFrame" name="frame_5">
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="cancelPushButton">
         <property name="text">
          <string>Cancel</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="okButton">
+       <widget class="QPushButton" name="okPushButton">
         <property name="text">
          <string>OK</string>
         </property>
@@ -198,9 +198,9 @@
  <resources/>
  <connections>
   <connection>
-   <sender>okButton</sender>
+   <sender>okPushButton</sender>
    <signal>clicked()</signal>
-   <receiver>CloudDialog</receiver>
+   <receiver>GradientDescentDialog</receiver>
    <slot>okButtonClicked()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -214,9 +214,9 @@
    </hints>
   </connection>
   <connection>
-   <sender>cancelButton</sender>
+   <sender>cancelPushButton</sender>
    <signal>clicked()</signal>
-   <receiver>CloudDialog</receiver>
+   <receiver>GradientDescentDialog</receiver>
    <slot>cancelButtonClicked()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -231,7 +231,7 @@
   </connection>
  </connections>
  <slots>
-  <slot>okButtonClicked()</slot>
   <slot>cancelButtonClicked()</slot>
+  <slot>okButtonClicked()</slot>
  </slots>
 </ui>

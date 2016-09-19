@@ -56,3 +56,5 @@ apps/editor_qt/editor/editor.pro.user
 apps/ifc_editor_qt/Makefile
 apps/raycasting_qt/build-editor-Desktop-Debug/
 apps/build-InfinityCAD-Desktop-Debug/
+
+apps/build-CloudFitting-Desktop_Qt_5_5_1_GCC_64bit-Debug/

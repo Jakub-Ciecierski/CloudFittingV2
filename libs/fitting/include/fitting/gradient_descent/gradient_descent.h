@@ -9,11 +9,10 @@
  */
 struct GradientParams{
     int max_iterations;
-    float tolerance;
-    float learning_rate;
+    double learning_rate;
 
-    float translation_weight;
-    float rotation_weight;
+    double translation_weight;
+    double rotation_weight;
 
     // Should be (0,0,0) by default
     glm::vec3 origins;
@@ -55,7 +54,7 @@ private:
     /**
      * Updates the cloud with current theta
      */
-    void UpdateCloud();
+    void UpdateCloud(const GradientTheta& theta);
 
     /**
      * Computes the next gradient.
@@ -65,14 +64,14 @@ private:
     /**
      * Computes gradient for specific dimension of the input vector.
      */
-    float ComputeGradientTranslationX(const GradientTheta& theta);
-    float ComputeGradientTranslationY(const GradientTheta& theta);
-    float ComputeGradientTranslationZ(const GradientTheta& theta);
-    float ComputeGradientRotationX(const GradientTheta& theta);
-    float ComputeGradientRotationY(const GradientTheta& theta);
-    float ComputeGradientRotationZ(const GradientTheta& theta);
+    double ComputeGradientTranslationX(const GradientTheta& theta);
+    double ComputeGradientTranslationY(const GradientTheta& theta);
+    double ComputeGradientTranslationZ(const GradientTheta& theta);
+    double ComputeGradientRotationX(const GradientTheta& theta);
+    double ComputeGradientRotationY(const GradientTheta& theta);
+    double ComputeGradientRotationZ(const GradientTheta& theta);
 
-    float ComputeGoalFunction();
+    double ComputeGoalFunction(const GradientTheta& theta);
 
     Cloud* cloud_;
     RigidObject* rigid_object_;
@@ -83,7 +82,7 @@ private:
     GradientTheta theta_;
 
     GradientTheta last_theta_;
-    float last_value_;
+    double last_value_;
 
     GradientParams params_;
 };

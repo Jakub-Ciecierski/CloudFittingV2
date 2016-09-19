@@ -18,7 +18,6 @@ using namespace pso;
 
 CloudFitter::CloudFitter(Cloud *cloud, RigidObject *rigidBody) :
     cloud(cloud), rigidBody(rigidBody){
-
 }
 
 CloudFitter::~CloudFitter() {
@@ -51,13 +50,15 @@ void CloudFitter::startPSO(){
 }
 
 void CloudFitter::startGradientDescent(){
-    GradientParams params{
-            1000, 0.1f, 0.1,
-            1.0f, 1.0f,
-            glm::vec3(0,0,0)
-    };
-
-    GradientDescent(cloud, rigidBody, params).RunGradient();
+    GradientTheta theta =
+            GradientDescent(cloud, rigidBody, gradient_params).RunGradient();
+    cloud->moveTo(theta.translation.x,
+                  theta.translation.y,
+                  theta.translation.z);
+    cloud->rotateTo(theta.rotation.x,
+                    theta.rotation.y,
+                    theta.rotation.z);
+    cloud->update();
 }
 
 //-----------------------//

@@ -19,7 +19,14 @@ void CloudFittingThread::setType(CloudFittingAlgorithm algorithm_type){
     this->algorithm_type = algorithm_type;
 }
 
+void CloudFittingThread::setGradientParams(GradientParams params){
+    this->params = params;
+}
+
+
 void CloudFittingThread::run(){
     CloudFitter cloudFitter(cloud, sphere);
+    cloudFitter.setGradientParams(params);
+
     cloudFitter.startFitting(algorithm_type);
 }

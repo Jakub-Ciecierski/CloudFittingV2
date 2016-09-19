@@ -77,7 +77,8 @@ SOURCES += src/glwidget.cpp \
     src/widgets/scene_list/context_menus/scm_sphere.cpp \
     src/dialogs/cloud_dialog.cpp \
     src/widgets/scene_list/context_menus/scm_cloud_fitting.cpp \
-    src/cloud_fitting_thread.cpp
+    src/cloud_fitting_thread.cpp \
+    src/dialogs/gradient_descent_dialog.cpp
 
 HEADERS  += build/ui/ui_mainwindow.h \
     src/context_menus/context_menu.h \
@@ -121,7 +122,8 @@ HEADERS  += build/ui/ui_mainwindow.h \
     src/widgets/scene_list/context_menus/scm_sphere.h \
     src/dialogs/cloud_dialog.h \
     src/widgets/scene_list/context_menus/scm_cloud_fitting.h \
-    src/cloud_fitting_thread.h
+    src/cloud_fitting_thread.h \
+    src/dialogs/gradient_descent_dialog.h
 
 ##############################
 
@@ -142,7 +144,8 @@ FORMS    += mainwindow.ui \
     src/dialogs/surface_c0_dialog.ui \
     src/dialogs/intersectiondialog.ui \
     src/dialogs/sphere_dialog.ui \
-    src/dialogs/cloud_dialog.ui
+    src/dialogs/cloud_dialog.ui \
+    src/dialogs/gradient_descent_dialog.ui
 
 RESOURCES += resources/icons.qrc \
     qdarkstyle/style.qrc

@@ -21,6 +21,7 @@ void CloudDialog::initDialog(){
     QLineEdit* verticesCountEdit = ui->verticesCountLineEdit;
     QLineEdit* ringsDividerEdit = ui->ringsDividerLineEdit;
     QLineEdit* sectionsDividerEdit = ui->sectionsDividerLineEdit;
+    QLineEdit* noiseLineEdit = ui->noiseLineEdit;
 
     QPushButton* cancelButton = ui->cancelButton;
     QPushButton* okButton = ui->okButton;
@@ -32,10 +33,12 @@ void CloudDialog::initDialog(){
     verticesCountEdit->setValidator(intValidator);
     ringsDividerEdit->setValidator(floatValidator);
     sectionsDividerEdit->setValidator(floatValidator);
+    noiseLineEdit->setValidator(floatValidator);
 
     verticesCountEdit->setText("100");
     ringsDividerEdit->setText("1");
     sectionsDividerEdit->setText("2");
+    noiseLineEdit->setText("0.1");
 
     okButton->setDefault(true);
     okButton->setAutoDefault(false);
@@ -55,14 +58,17 @@ void CloudDialog::okButtonClicked(){
     QLineEdit* verticesCountEdit = ui->verticesCountLineEdit;
     QLineEdit* ringsDividerEdit = ui->ringsDividerLineEdit;
     QLineEdit* sectionsDividerEdit = ui->sectionsDividerLineEdit;
+    QLineEdit* noiseLineEdit = ui->noiseLineEdit;
 
     int verticesCount = verticesCountEdit->text().toInt();
     float ringsDivider = ringsDividerEdit->text().toFloat();
     float sectionsDivider = sectionsDividerEdit->text().toFloat();
+    float noise = noiseLineEdit->text().toFloat();
 
     data.verticesCount = verticesCount;
     data.ringsDivider = ringsDivider;
     data.sectionsDivider = sectionsDivider;
+    data.distortion = noise;
 
     close();
 }
