@@ -13,6 +13,7 @@ GradientDescent::GradientDescent(Cloud* cloud,
 
     //theta_.translation = cloud->getPosition();
     //theta_.rotation = cloud->getRotations();
+
     last_theta_ = theta_;
 }
 

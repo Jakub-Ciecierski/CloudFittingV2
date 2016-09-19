@@ -29,7 +29,7 @@ void GradientDescentDialog::initDialog(){
 
     QDoubleValidator* floatValidator =
             new QDoubleValidator(0, 1000.0, 10, NULL);
-    QIntValidator* intValidator = new QIntValidator(1, 10000, NULL);
+    QIntValidator* intValidator = new QIntValidator(1, 100000, NULL);
 
     maxIterLineEdit->setValidator(intValidator);
     learningRateLineEdit->setValidator(floatValidator);

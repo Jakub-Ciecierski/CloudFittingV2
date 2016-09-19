@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
     EditorWindow& w = EditorWindow::getInstance();
 
     ObjectManager& objManager = ObjectManager::getInstance();
-    objManager.TEST_SPHERE();
+    //objManager.TEST_SPHERE();
     //objManager.TEST_PERFORMANCE();
     //objManager.TEST_BSPLINE_INTERP();
     //objManager.TEST_SURFACE();

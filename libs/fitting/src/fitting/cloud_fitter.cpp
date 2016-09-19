@@ -31,7 +31,7 @@ CloudFitter::~CloudFitter() {
 void CloudFitter::startPSO(){
     int swarmSize = 150;
     double maxVelocity = 2.0f;
-    int maximumIterations = 1000;
+    int maximumIterations = 150;
     int threadCount = threading::getNumberOfCores();
     if (threadCount < 1) threadCount = 4;
 
